@@ -1,5 +1,5 @@
 # IHA_Kiralama_Projesi
-
+iha_rent_core is project folder. rent_app is app folder.
 
 - **Welcome Page**: Displays the welcome page of the application.
     - URL: `127.0.0.1:8000/`
