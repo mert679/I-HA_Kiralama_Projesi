@@ -1,0 +1,49 @@
+{%extends 'rent/layout.html'%}
+
+{% block body %}
+{%if user.is_superuser%}
+ <h1>Kira Kayıtları</h1>
+
+<table class="table table-bordered" id="myTable">
+    <thead>
+        <tr>
+            <th>username</th>
+            <th>iha</th>
+            <th>kira başlama tarihi</th>
+            <th>kira bitiş tarihi</th>   
+            <th>Sil</th>
+            <th>Güncelle</th>       
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in rent_record %}
+        <tr>
+            <td>{{i.user_rent.username}}</td>
+            <td>{{i.iha.model}}</td>
+            <td>{{i.rental_start_date}}</td>
+            <td>{{i.rental_end_date}}</td>
+           
+            <td style="background-color: red;
+            color: white; cursor: pointer;  border-bottom: 1px solid white; text-align: center;">
+           <a href="{% url 'rent-delete' i.id %}" style="text-decoration: none; color: white;">Sil</a>
+            </td>
+            
+            <td style="background-color: orange;
+            color: white; cursor: pointer;  border-bottom: 1px solid white; text-align: center;">
+            <a href="{% url 'rent-update' i.id %}" style="text-decoration: none; color: white;">Güncelle</a></td>
+            
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        $("#myTable").DataTable({
+            "ordering" :false
+        })
+        
+    })
+</script>
+{% endif %}
+{%endblock%}

@@ -1,0 +1,68 @@
+{%extends 'rent/layout.html'%}
+
+{% block body %}
+{%if user.is_authenticated%}
+ <h1>Ana Sayfa</h1>
+ <div style="float: right; margin-bottom: 20px;">
+    {% if user.is_superuser %}
+    <a href="{% url 'iha_create'%}" class="btn btn-primary">İha ekle</a>
+    <a href="{% url 'rent-list'%}" class="btn btn-primary">Kira Kayıtları</a>
+    {% else %}
+    <a  href="{% url 'user-rent'%}"class="btn btn-primary">kiraladıklarım</a>
+    <a href="{% url 'iha-rent' %}" class="btn btn-primary">Kirala</a>
+    {% endif %}
+
+</div>
+<table class="table table-bordered" id="myTable">
+    <thead>
+        <tr>
+            <th>model</th>
+            <th>marka</th>
+            <th>ağırlık</th>
+            <th>kategori</th>
+            <th>hava kalma süresi</th>
+            <th>irtifa</th>
+            <th>hız</th>
+            {% if user.is_superuser %}
+            <th>Sil</th>
+            <th>Güncelle</th>
+            {%endif%}
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in iha %}
+        <tr>
+            <td>{{i.model}}</td>
+            <td>{{i.brand}}</td>
+            <td>{{i.weight}}</td>
+            <td>{{i.category}}</td>
+            <td>{{i.air_time}}</td>
+            <td>{{i.flight_altitude}}</td>
+            <td>{{i.speed}}</td>
+            
+            {% if user.is_superuser %}
+           
+            <td style="background-color: red;
+            color: white; cursor: pointer;  border-bottom: 1px solid white; text-align: center;">
+           <a href="{% url 'iha-delete' i.id %}" style="text-decoration: none; color: white;">Sil</a>
+            </td>
+            
+            <td style="background-color: orange;
+            color: white; cursor: pointer;  border-bottom: 1px solid white; text-align: center;">
+            <a href="{% url 'iha-update' i.id %}" style="text-decoration: none; color: white;">Güncelle</a></td>
+            {%endif%}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        $("#myTable").DataTable({
+            "ordering" :false
+        })
+        
+    })
+</script>
+{% endif %}
+{%endblock%}

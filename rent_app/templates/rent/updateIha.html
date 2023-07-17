@@ -1,0 +1,12 @@
+{%extends 'rent/layout.html'%}
+
+{% block body %}
+{%if user.is_superuser%}
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Güncelle</button>
+</form>
+
+{% endif %}
+{%endblock%}

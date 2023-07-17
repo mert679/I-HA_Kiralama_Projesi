@@ -1,0 +1,30 @@
+{%extends 'rent/layout.html'%}
+
+{% block body %}
+{%if user.is_authenticated%}
+ <h1>Kira Kayıtları</h1>
+
+<table class="table table-bordered" id="myTable">
+    <thead>
+        <tr>
+            <th>username</th>
+            <th>iha</th>
+            <th>Kira başlama tarihi</th>
+            <th>Kira bitiş tarihi</th>         
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in user_rent_record %}
+        <tr>
+            <td>{{i.user_rent.username}}</td>
+            <td>{{i.iha.model}}</td>
+            <td>{{i.rental_start_date}}</td>
+            <td>{{i.rental_end_date}}</td> 
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endif %}
+{%endblock%}
