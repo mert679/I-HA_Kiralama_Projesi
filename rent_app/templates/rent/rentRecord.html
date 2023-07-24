@@ -10,9 +10,9 @@
             <th>username</th>
             <th>iha</th>
             <th>kira başlama tarihi</th>
-            <th>kira bitiş tarihi</th>   
+            <th>kira bitiş tarihi</th>
             <th>Sil</th>
-            <th>Güncelle</th>       
+            <th>Güncelle</th>
         </tr>
     </thead>
     <tbody>
@@ -22,12 +22,12 @@
             <td>{{i.iha.model}}</td>
             <td>{{i.rental_start_date}}</td>
             <td>{{i.rental_end_date}}</td>
-           
+
             <td style="background-color: red;
             color: white; cursor: pointer;  border-bottom: 1px solid white; text-align: center;">
            <a href="{% url 'rent-delete' i.id %}" style="text-decoration: none; color: white;">Sil</a>
             </td>
-            
+
             <td style="background-color: orange;
             color: white; cursor: pointer;  border-bottom: 1px solid white; text-align: center;">
             <a href="{% url 'rent-update' i.id %}" style="text-decoration: none; color: white;">Güncelle</a></td>
@@ -37,13 +37,38 @@
     </tbody>
 </table>
 
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <script>
+    // $(document).ready(function() {
+    //     $("#myTable").DataTable({
+    //         "ordering" :false,
+    //         'processing': true,
+    //         'serverSide': true,
+    //         "pageLength": 5,
+    //         "paging":   false,
+    //         "searching": true,
+    //         "ajax": {
+    //             url: "{% url 'rent-record-list'%}",
+    //             dataSrc: ''
+    //         },
+    //         "columns":[
+    //             {'data':"user_rent"},
+    //             {'data':"iha"},
+    //             {'data':"rental_start_date"},
+    //             {'data':"rental_end_date"},
+                
+    //         ]
+
+    //     })
+        
+    // });
     $(document).ready(function () {
         $("#myTable").DataTable({
             "ordering" :false
         })
         
     })
+    
 </script>
 {% endif %}
 {%endblock%}
