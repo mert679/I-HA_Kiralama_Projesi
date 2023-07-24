@@ -9,9 +9,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.views.decorators.csrf import csrf_protect   
 from django.contrib.auth.mixins import LoginRequiredMixin
+from rest_framework.generics import ListAPIView
+from rest_framework.response import Response
 
 from .models import User, Iha, RentRecord
 from .forms import IhaCreateUpdateForm, IhaUpdateForm, IhaRentForm
+from .serializers import RentRecordListSerializer
 
 class WelcomePageView(generic.TemplateView):
     template_name = 'rent/layout.html'
@@ -98,6 +101,15 @@ class RentRecordListView(generic.ListView):
     template_name = 'rent/rentRecord.html'
     model = RentRecord
     context_object_name ='rent_record'
+
+
+class RentRecordApiV(ListAPIView):
+    
+    serializer_class = RentRecordListSerializer
+    queryset = RentRecord.objects.all()
+
+
+
 
 # this view to update rent.
 class RentRecordUpdateView(UpdateView):
